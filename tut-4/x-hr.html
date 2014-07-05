@@ -1,0 +1,54 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<polymer-element name="x-hr" attributes="width color">
+    <template>
+        <div>
+            <button on-click="{{makeSmaller}}">&lt;&lt;</button>
+            <button on-click="{{makeBigger}}">&gt;&gt;</button>
+            <hr width="{{width}}" style="border-color: {{color}}">
+        </div>
+    </template>
+    <script>
+        Polymer('x-hr', {
+            publish: {
+                width: 50
+            },
+
+            makeSmaller: function() {
+                this.width -= 10;
+            },
+
+            makeBigger: function() {
+                this.width += 10;
+            },
+
+            // ----- other events from the docs
+            // http://www.polymer-project.org/docs/polymer/polymer.html#lifecyclemethods
+
+            created: function() {
+                // An instance of the element is created.
+                console.log('x-hr created');
+            },
+            ready: function() {
+                // The <polymer-element> has been fully prepared (e.g. Shadow DOM created, property observers setup, event listeners attached, etc).
+                console.log('x-hr ready');
+            },
+            attached: function() {
+                // An instance of the element was inserted into the DOM.
+                console.log('x-hr attached');
+            },
+            domReady: function() {
+                // Called when the element’s initial set of children are guaranteed to exist. This is an appropriate time to poke at the element’s parent or light DOM children. Another use is when you have sibling custom elements (e.g. they’re .innerHTML‘d together, at the same time). Before element A can use B’s API/properties, element B needs to be upgraded. The domReady callback ensures both elements exist.
+                console.log('x-hr domReady');
+            },
+            detached: function() {
+                // An instance was removed from the DOM.
+                console.log('x-hr detached');
+            },
+
+            attributeChanged: function(attrName, oldVal, newVal) {
+                // An attribute was added, removed, or updated. Note: to observe changes to published properties, use changed watchers.
+                console.log(attrName, 'old: ' + oldVal, 'new: ', newVal);
+            }
+        })
+    </script>
+</polymer-element>

@@ -1,0 +1,33 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<polymer-element name="x-hr" attributes="width color">
+    <template>
+        <div>
+            <button on-click="{{makeSmaller}}">&lt;&lt;</button>
+            <button on-click="{{makeBigger}}">&gt;&gt;</button>
+            <hr id="hr" width="{{width}}" style="border-color: {{color}}" on-click="{{makeBigger}}">
+        </div>
+    </template>
+    <script>
+        Polymer('x-hr', {
+            publish: {
+                width: 50
+            },
+
+            makeSmaller: function() {
+                this.width -= 10;
+            },
+
+            makeBigger: function() {
+                this.width += 10;
+            },
+
+            widthChanged: function(v1, v2) {
+/*
+                this.$
+*/
+                console.dir(this.$.hr);
+            }
+
+        })
+    </script>
+</polymer-element>

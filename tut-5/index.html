@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="../bower_components/platform/platform.js"></script>
+    <!--import custom element-->
+    <link rel="import" href="x-hr.html">
+</head>
+<body>
+
+<div>
+    <h1>Event Mapping &amp; Observing Property Changes</h1>
+    <ul>
+        <li>Two way data binding is automatic.</li>
+        <li>Register functions to `on-xxx` events. TODO: Events reference link?</li>
+        <li>Observe property changes through **changed watcher**</li>
+        <li>Observe property changes through **observe** block. Polymer does not call the propertyNameChanged callback for properties included in an observe block.</li>
+    </ul>
+</div>
+
+<!--use custom element-->
+<x-hr></x-hr>
+<x-hr width="200"></x-hr>
+
+<script>
+    // interface with elements after this event
+    // Polymer's version of DOMContentLoaded (or JQuery's $(document).ready)
+    // http://www.polymer-project.org/docs/polymer/polymer.html#polymer-ready
+    // https://developer.mozilla.org/en-US/docs/Web/Events/DOMContentLoaded
+    window.addEventListener('polymer-ready', function(e) {
+        var xHr = document.querySelector('x-hr');
+        xHr.color = 'red';
+    });
+</script>
+
+</body>
+</html>

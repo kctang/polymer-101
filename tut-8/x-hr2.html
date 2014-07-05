@@ -1,0 +1,20 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="x-hr.html">
+<polymer-element name="x-hr2" extends="x-hr">
+    <template>
+        <div style="border: 2px dotted #008000">
+            <shadow></shadow>
+        </div>
+    </template>
+    <script>
+        Polymer('x-hr2', {
+            // override functions delared in x-hr
+            makeBigger: function() {
+                for(var c=0; c<10; c++) {
+                    // call makeBigger from x-hr
+                    this.super();
+                }
+            }
+        })
+    </script>
+</polymer-element>

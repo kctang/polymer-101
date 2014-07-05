@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--modernize all decent browsers-->
+    <!--http://www.polymer-project.org/docs/start/platform.html-->
+    <script src="../bower_components/platform/platform.js"></script>
+
+    <!--loads core polymer features-->
+    <!--MUST READ! http://www.polymer-project.org/docs/polymer/polymer.html -->
+    <link rel="import" href="../bower_components/polymer/polymer.html">
+</head>
+<body>
+
+<div>
+    <h1>Simple x-hr Component</h1>
+    Create a custom element that draws a horizontal line. Nothing fancy, just to demonstrate how a basic web component looks like.
+
+    <ul>
+        <li>Spec says element name MUST contain dash character somewhere.</li>
+        <li>HTML is NOT XML. DO NOT self-close a custom element tag as it will lead to unpredictable results. Close each tag with a closing tag.</li>
+    </ul>
+</div>
+
+<!--declare a custom element called "x-hr"-->
+<polymer-element name="x-hr" noscript>
+    <template>
+        <hr>
+    </template>
+</polymer-element>
+
+<!--use the custom element 3 times-->
+Use x-hr custom tag three times:
+<x-hr></x-hr>
+<x-hr></x-hr>
+<x-hr></x-hr>
+
+Wrong way of using it (self closing tag - BAD):
+<x-hr/>
+<x-hr/>
+<x-hr/>
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="../bower_components/platform/platform.js"></script>
+    <!--import custom element-->
+    <link rel="import" href="x-hr.html">
+</head>
+<body>
+
+<div>
+    <h1>Custom Event</h1>
+    <ul>
+        <li>fire() custom events.</li>
+        <li>If your element is within another Polymer element, you can use the special on-* handlers to deal with the event.</li>
+    </ul>
+</div>
+
+<!--use custom element-->
+<x-hr></x-hr>
+<x-hr width="200"></x-hr>
+
+<script>
+    // interface with elements after this event
+    // Polymer's version of DOMContentLoaded (or JQuery's $(document).ready)
+    // http://www.polymer-project.org/docs/polymer/polymer.html#polymer-ready
+    // https://developer.mozilla.org/en-US/docs/Web/Events/DOMContentLoaded
+    window.addEventListener('polymer-ready', function(e) {
+        var xHr = document.querySelector('x-hr');
+        xHr.color = 'red';
+
+        xHr.addEventListener('too-small', function(e) {
+            console.log(e.detail.msg);
+        })
+    });
+</script>
+
+</body>
+</html>

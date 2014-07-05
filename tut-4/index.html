@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="../bower_components/platform/platform.js"></script>
+    <!--import custom element-->
+    <link rel="import" href="x-hr.html">
+</head>
+<body>
+
+<div>
+    <h1>Element Lifecycle Methods, `polymer-ready` Event</h1>
+    <ul>
+        <li>Execute method when element is created, ready, attached, DOM ready, detached or value of attribute changed.</li>
+        <li>Interact with elements after `polymer-ready` event has been triggered.</li>
+    </ul>
+</div>
+
+<!--use custom element-->
+<x-hr></x-hr>
+<x-hr width="200"></x-hr>
+
+<script>
+    // interface with elements after this event
+    // Polymer's version of DOMContentLoaded (or JQuery's $(document).ready)
+    // http://www.polymer-project.org/docs/polymer/polymer.html#polymer-ready
+    // https://developer.mozilla.org/en-US/docs/Web/Events/DOMContentLoaded
+    window.addEventListener('polymer-ready', function(e) {
+        var xHr = document.querySelector('x-hr');
+        xHr.color = 'red';
+    });
+</script>
+
+</body>
+</html>
