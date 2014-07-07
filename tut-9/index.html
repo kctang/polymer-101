@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="../bower_components/platform/platform.js"></script>
+    <link rel="import" href="../bower_components/polymer/polymer.html">
+</head>
+<body>
+
+<div>
+    <h1>Templates, Data Binding</h1>
+
+    <ul>
+        <li>Template's repeat attribute</li>
+        <li>Data binding in inputs will update model</li>
+        <li>Using third party library (i.e. underscore.js) (not sure if this is a good approach)
+            <ul>
+                <li>Q: Seems to be globally scoped. Ok?</li>
+            </ul>
+        </li>
+        <li>Event target.templateInstance.model.</li>
+    </ul>
+    <hr>
+</div>
+
+<x-customerList></x-customerList>
+
+
+<!--placed in same file for convenience to learn-->
+<polymer-element name="x-customerList">
+    <template>
+        Customer List
+        <ul>
+            <template repeat="{{customer in customers}}">
+                <li>{{customer.name}}
+                    <!--so primitive, got to be a better way-->
+                    <!--<button on-click="{{remove}}" customerName="{{customer.name}}">Remove</button>-->
+                    <button on-click="{{remove}}">Remove</button>
+                </li>
+            </template>
+        </ul>
+        Add a new customer called "{{newCustomer}}" by clicking on the button.
+        <input value="{{newCustomer}}">
+        <button on-click="{{add}}">Click!</button>
+    </template>
+    <script src="../bower_components/underscore/underscore.js"></script>
+    <script>
+        Polymer('x-customerList', {
+            ready: function () {
+                this.customers = [
+                    {name: 'bob'},
+                    {name: 'cat'},
+                    {name: 'dan'},
+                    {name: 'elle'}
+                ]
+            },
+            add: function () {
+                this.customers.push({name: this.newCustomer});
+            },
+            remove: function (event, detail, target) {
+                // target.templateInstance lets you access model
+                var model = target.templateInstance.model;
+                this.customers = _.reject(this.customers, function (element) {
+                    return element.name === model.customer.name;
+                });
+            }
+        });
+    </script>
+</polymer-element>
+
+</body>
+</html>
