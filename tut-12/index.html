@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="../bower_components/platform/platform.js"></script>
+    <link rel="import" href="../bower_components/polymer/polymer.html">
+</head>
+<body>
+
+<div>
+    <h1>Conditional attribute, type hinting and one-time binding.</h1>
+
+    <ul>
+        <li>Conditional attribute.</li>
+        <li>Type hinting.</li>
+        <li>One-time binding.</li>
+    </ul>
+    <hr>
+</div>
+
+<x-smiley name="Bob" happyFlag="true"></x-smiley>
+<x-smiley name="Cat" happyFlag="false"></x-smiley>
+
+<polymer-element name="x-smiley" attributes="name, happyFlag" noscript>
+    <template>
+        {{name}} is
+        <span hidden?="{{happyFlag == 'false'}}">:-)</span>
+        <span hidden?="{{happyFlag == 'true'}}">:-(</span>
+        <button on-click="{{moodSwing}}">Mood Swing</button>
+
+        {{name}} started happy?
+        <!--one-time binding-->
+        <input value="[[happyFlag]]">
+        {{name}} is happy?
+        <input value="{{happyFlag}}">
+        <hr>
+    </template>
+    <script>
+        // type hinting
+        // http://stackoverflow.com/questions/24643823/polymer-custom-element-attributes-as-boolean-typed-values
+        Polymer('x-smiley', {
+            created: function () {
+                this.happyFlag = false;
+            },
+            moodSwing: function() {
+                this.happyFlag = !this.happyFlag;
+            }
+        });
+    </script>
+</polymer-element>
+
+</body>
+</html>
+

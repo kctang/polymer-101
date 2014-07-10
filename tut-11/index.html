@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="../bower_components/platform/platform.js"></script>
+    <link rel="import" href="../bower_components/polymer/polymer.html">
+</head>
+<body>
+
+<div>
+    <h1>Import Template By Reference</h1>
+
+    <ul>
+        <li>Templates can declared with (id) and used via (ref)</li>
+        <li>Create recursive templates by combining with repeat attribute</li>
+    </ul>
+    <hr>
+</div>
+
+<x-customerList></x-customerList>
+
+<polymer-element name="x-customerList">
+    <template>
+        <!--define a reusable template-->
+        <template id="simpleList">
+            I am {{person.name}}.
+        </template>
+
+        <!--reference and use simpleList twice-->
+        <template bind ref="simpleList"></template>
+        <template bind ref="simpleList"></template>
+
+        <!--reusable template in recursive usage-->
+        <template repeat="{{topics}}" id="titleList">
+            <ul>
+                <li>{{title}}
+                    <!--use titleList but repeat using replies instead of topics-->
+                    <template ref="titleList" repeat="{{replies}}"></template>
+                </li>
+            </ul>
+        </template>
+
+    </template>
+    <script>
+        Polymer('x-customerList', {
+            person: {
+                name: 'Bob',
+                hobbies: [ 'Sleep', 'Eat', 'Play' ],
+                /*false will not display nom nom hobby*/
+                active: true
+            },
+
+            topics: [
+                { title: 'topic 1',
+                    replies: [
+                        { title: 'topic 1.1' },
+                        { title: 'topic 1.2' },
+                        { title: 'topic 1.3' },
+                        { title: 'topic 1.4' },
+                        { title: 'topic 1.5' },
+                    ]
+                },
+                { title: 'topic 2',
+                    replies: [
+                        { title: 'topic 2.1' },
+                        { title: 'topic 2.2' },
+                        { title: 'topic 2.3',
+                            replies: [
+                                { title: 'topic 2.3.1' },
+                                { title: 'topic 2.3.2' },
+                                { title: 'topic 2.3.3' },
+                                { title: 'topic 2.3.4' },
+                                { title: 'topic 2.3.5' }
+                            ]
+                        },
+                        { title: 'topic 2.4' },
+                        { title: 'topic 2.5' }
+                    ]
+                },
+                { title: 'topic 3' },
+                { title: 'topic 4' },
+                { title: 'topic 5' }
+            ]
+        });
+    </script>
+</polymer-element>
+
+</body>
+</html>

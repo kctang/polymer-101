@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="../bower_components/platform/platform.js"></script>
+    <link rel="import" href="../bower_components/polymer/polymer.html">
+</head>
+<body>
+
+<div>
+    <h1>Binding Data To Template</h1>
+
+    <ul>
+        <li>Single template instance with bind</li>
+        <li>Iterative templates with repeat</li>
+        <li>Conditional templates with if</li>
+    </ul>
+    <hr>
+</div>
+
+<x-customerList></x-customerList>
+
+
+<polymer-element name="x-customerList">
+    <template>
+        <!--single template instance-->
+        <!--"as p" is optional (do it create a named scope access to the properties)-->
+        <template bind="{{person as p}}">
+            {{p.name}} is a person with these hobbies:
+            <ul>
+                <!--"in p.hobbies" is also optional for named scope access (but I recommend it for clarity)-->
+                <template repeat="{{hobby in p.hobbies}}">
+                    <li>{{hobby}}</li>
+                </template>
+            </ul>
+            Nom nom hobby:
+            <ul>
+                <!--count as you display-->
+                <template repeat="{{hobby, hobbyIndex in p.hobbies}}" if="{{p.active}}">
+                    <!--only display if it is "Eat"-->
+                    <template if="{{hobby == 'Eat'}}">
+                        <!--can perform arithmetics in expressions-->
+                        <li>{{hobby}} {{hobbyIndex+1}}</li>
+                    </template>
+                </template>
+            </ul>
+            <!--direct access from p-->
+            You have {{p.hobbies.length}} hobbies!
+        </template>
+    </template>
+    <script>
+        Polymer('x-customerList', {
+            person : {
+                name: 'Bob',
+                hobbies: [ 'Sleep', 'Eat', 'Play' ],
+                /*false will not display nom nom hobby*/
+                active: true
+            }
+        });
+    </script>
+</polymer-element>
+
+</body>
+</html>
